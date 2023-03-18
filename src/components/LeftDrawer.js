@@ -1,7 +1,7 @@
 import React, { useRef ,useEffect} from "react";
 import { DrawerLayoutAndroid, Text, View, Image, StyleSheet, TouchableOpacity } from "react-native";
 import LinearGradient from 'react-native-linear-gradient';
-
+import { useNavigation } from "@react-navigation/native";
 import User_Pic from './../assests/images/user_pic.png';
 import Home_Icon from './../assests/icon/home.png';
 import Login_Icon from './../assests/icon/login.png';
@@ -9,6 +9,8 @@ import { useSelector } from "react-redux";
 import store from "../redux/store";
 
 const LeftDrawer = (props) => {
+
+    
 
     const {openDrawer} = useSelector((store) => store.datas)
 
@@ -25,10 +27,9 @@ const LeftDrawer = (props) => {
     const navigationView = () => {
         return (
             <>
-            {console.log("Drawer", openDrawer)}
                 <LinearGradient colors={['#91C788', '#29745E']} style={styles.pic_container}>
                     <Image style={styles.user_pic} source={User_Pic}></Image>
-                    <Text style={styles.user_name}>Guest</Text>
+                    <Text style={styles.user_name}>Ankit Singh</Text>
                 </LinearGradient>
                 <View style={styles.route_container}>
                     <TouchableOpacity style={styles.route_button}>
@@ -40,9 +41,22 @@ const LeftDrawer = (props) => {
                     <TouchableOpacity style={styles.route_button}>
                         <View style={styles.wrapper}>
                             <Image style={styles.icon} source={Login_Icon} />
-                            <Text style={styles.text}>Login</Text>
+                            <Text style={styles.text}>VIew Appointment</Text>
                         </View>
                     </TouchableOpacity>
+                    <TouchableOpacity style={styles.route_button}>
+                        <View style={styles.wrapper}>
+                            <Image style={styles.icon} source={Login_Icon} />
+                            <Text style={styles.text}>Profile</Text>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.route_button}>
+                        <View style={styles.wrapper}>
+                            <Image style={styles.icon} source={Login_Icon} />
+                            <Text style={styles.text}>Logout</Text>
+                        </View>
+                    </TouchableOpacity>
+                    
                 </View>
             </>
         );

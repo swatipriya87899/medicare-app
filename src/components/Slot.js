@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, FlatList, Text, StyleSheet} from 'react-native';
 import SubHeading from '../components/SubHeading';
-import Button from './Button';
+import StaticButton from './StaticButton';
 
 const Slot = ({slots, date}) => {
  
@@ -14,7 +14,7 @@ const Slot = ({slots, date}) => {
           data={slots}
           renderItem={({item}) => (
             <View style={{marginLeft: 5}}>
-              <Button
+              <StaticButton
                 title={item.timing}
                 button_style={{
                   color: '#064635',
@@ -22,7 +22,7 @@ const Slot = ({slots, date}) => {
                   borderWidth: 1,
                   borderColor: '#064635',
                   borderRadius: 30,
-                }}></Button>
+                }}></StaticButton>
             </View>
           )}
           keyExtractor={item => item.id}

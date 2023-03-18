@@ -3,30 +3,27 @@ import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 import Button from './Button';
-import {colors} from "../variable"
 
 
 const Card = (props) => {
   const navigation = useNavigation();
 
-//   function capitalize(word) {
-//   return word[0].toUpperCase() + word.substring(1).toLowerCase();
-// }
+  function capitalize(word) {
+  return word[0].toUpperCase() + word.substring(1).toLowerCase();
+}
 
-// props.type = props.type.map((item)=> capitalize(item))
+props.type = props.type.map((item)=> capitalize(item))
 
   return (
     <View style={styles.card}>
       {/* Image of the Hospital */}
       <View style={styles.card_image_box}>
-        <Image source={{
-          uri: 'https://reactnative.dev/img/tiny_logo.png',
-        }} style={[styles.card_image, { width: "100%", height: "100%" }]} />
+        <Image source={{ uri: props.image }} style={[styles.card_image, { width: "100%", height: "100%" }]} />
       </View>
 
 
       {/* Type of Hospital */}
-      <Text style={styles.hospital_type}>Psychiatric Hospitals</Text>
+      <Text style={styles.hospital_type}>{props.type.join(", ")}</Text>
 
   
 
@@ -42,8 +39,8 @@ const Card = (props) => {
           <Text style={[styles.font_style]}>{props.distance} KM From Here</Text>
         </View>
         <View>
-          <TouchableOpacity><Icon name="globe" size={25} color={colors.lightColor} /></TouchableOpacity>
-          <Icon name="phone" size={25} color={colors.lightColor}/>
+          <TouchableOpacity onPress={() => navigation.navigate('map', { lat: props.latitude, long: props.longitude, currentLocation: props.location, name: props.name, city: props.city })}><Icon name="globe" size={25} color="#26e07f" /></TouchableOpacity>
+          <Icon name="phone" size={25} color="#26e07f" />
         </View>
       </View>
 
@@ -54,7 +51,7 @@ const Card = (props) => {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: colors.primaryColor,
+    backgroundColor: '#064635',
     margin: 1,
     marginBottom: 20,
     borderRadius: 7,

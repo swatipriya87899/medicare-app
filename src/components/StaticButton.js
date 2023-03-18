@@ -1,14 +1,11 @@
 import React from 'react';
 import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
-import Share from 'react-native-vector-icons/AntDesign';
-import {useNavigation} from '@react-navigation/native';
 
-const Button = props => {
+const StaticButton = props => {
 
-  const navigation = useNavigation();
   
   return (
-    <TouchableOpacity style={[styles.button]} onPress={() => navigation.navigate(props.navigation_link,props.id && {id:props.id})}>
+    <TouchableOpacity style={[styles.button]}>
       <Text style={[styles.button_text, props.button_style]}>
         {props.icon && <props.icon name={props.icon_name} size={props.icon_size} color={props.icon_color}/>}
         {props.title}
@@ -37,4 +34,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Button;
+export default StaticButton;

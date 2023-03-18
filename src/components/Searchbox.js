@@ -3,7 +3,6 @@ import { View, StyleSheet, TextInput, Text, Image, TouchableOpacity } from 'reac
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useDispatch } from 'react-redux';
 import { getNearbyHospitals, loader } from '../redux/action';
-import {colors} from "../variable"
 
 import config from './../../config';
 
@@ -59,7 +58,8 @@ const styles = StyleSheet.create({
     },
 
     searchbox: {
-        backgroundColor: colors.lightColor,
+        backgroundColor: "rgba(221, 255, 188, 0.5)",
+        // textAlign: "center",
         justifyContent: 'center',
         width: "85%",
         borderRadius: 8,

@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import config from './../../config';
 import { useDispatch } from 'react-redux';
 import { getNearbyHospitals, loader } from '../redux/action';
 
 const data = [
-  { label: 'Ayurveda Hospital', value: 'Ayurveda' },
-  { label: 'Yoga Hospital', value: 'Yoga' },
-  { label: 'Naturopathy Hospital', value: 'Naturopathy' },
-  { label: 'Unani Hospital', value: 'Unani' },
-  { label: 'Siddha Hospital', value: 'Siddha' },
-  { label: 'Homeopathy Hospital', value: 'Homeopathy' },
-  { label: 'Government Hospital', value: 'Government' },
-  { label: 'Private Hospital', value: 'Private' }
+  { label: 'Neurological', value: 'Ayurveda' },
+  { label: 'Cardiovascular', value: 'Yoga' },
+  { label: 'Gastrointestinal', value: 'Naturopathy' },
+  { label: 'Orthopedic', value: 'Unani' },
+  { label: 'Pulmonary', value: 'Siddha' },
+  { label: 'Renal', value: 'Homeopathy' },
+  { label: 'Gastrointestinal', value: 'Government' },
+  { label: 'Endocrine', value: 'Private' }
 ];
 
 const DropdownComponent = (props) => {
@@ -24,7 +23,30 @@ const DropdownComponent = (props) => {
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
 
-
+  useEffect(() => {
+    if (value) {
+      dispatch(loader(true))
+      fetch(`${config.Base_API_URL}/hospital/getNearbyHospitalsWithFilter`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          latitude: props.location.latitude,
+          longitude: props.location.longitude,
+          radius: 3000,
+          mode: "D",
+          query: value.toLowerCase()
+        })
+      }).then(response => response.json()).then(
+        (data) => {
+          dispatch(getNearbyHospitals(data))
+          dispatch(loader(false))
+        }
+      )
+    }
+  }, [value])
 
   return (
     <View style={{ alignItems: "center" }}>

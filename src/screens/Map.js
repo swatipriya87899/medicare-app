@@ -1,5 +1,11 @@
-import React, {useState} from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import React, {useState, useRef, useEffect} from 'react';
+import {Text, View, Button, StyleSheet, Modal, Dimensions} from 'react-native';
+import MapView from 'react-native-maps';
+import MapViewDirections from 'react-native-maps-directions';
+import {Marker} from 'react-native-maps';
+import {GOOGLE_MAP_KEY} from '../constants/googleMapKey';
+import MapDetails from '../components/MapDetails';
+import { locationPermission } from '../components/MapHelperFunction';
 import TrackLocation from '../components/TrackLocation';
 
 const Map = ({route}) => {
@@ -26,7 +32,7 @@ const Map = ({route}) => {
   return (
     <View style={{flex: 1}}>
       <TrackLocation fetchDetails={fetchDetails} lat={lat} long={long} currentLocation={currentLocation}/>
-      {/* <MapDetails  name={name} city={city} details={travel_details}></MapDetails> */}
+      <MapDetails  name={name} city={city} details={travel_details}></MapDetails>
     </View>
 
   );

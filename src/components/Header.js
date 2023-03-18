@@ -1,20 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Nav from 'react-native-vector-icons/Fontisto';
+import { useDispatch } from 'react-redux';
+import { openDrawer } from '../redux/action';
+import { useSelector } from "react-redux";
 
+
+import config from '../../config';
 
 const Header = (props) => {
 
+  const dispatch = useDispatch();
 
-
+  const draw = useSelector((store) => store.datas.openDrawer)
 
   const [place, setPlace] = useState("Varanasi");
+
+  useEffect(() => {
+    fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${props.location.latitude},${props.location.longitude}&key=${config.key.google_map}`).then(response => response.json()).then(
+      (placeData) => {
+        setPlace(placeData.results[0].address_components[1].short_name)
+      }
+    )
+  }, [props.location])
 
   return (
     <View style={styles.header}>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={()=>dispatch(openDrawer(!draw))}>
           <Nav name="nav-icon-a" size={25} color="#064635"></Nav>
         </TouchableOpacity>
         {/* App-name */}
