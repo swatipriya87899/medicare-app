@@ -9,8 +9,17 @@ import Nav from 'react-native-vector-icons/Fontisto';
 import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import StaticButton from '../components/StaticButton';
+import { useDispatch } from 'react-redux';
+import { openDrawer } from '../redux/action';
+import { useSelector } from "react-redux";
 
 const AvailableSlot = () => {
+
+  const dispatch = useDispatch();
+
+  const draw = useSelector((store) => store.datas.openDrawer)
+
+
   const slots = [
     {
       timing: '10.30 AM',
@@ -30,7 +39,9 @@ const AvailableSlot = () => {
       {/* <Header /> */}
       <View style={styles.header}>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Nav name="nav-icon-a" size={25} color="#064635"></Nav>
+          <TouchableOpacity onPress={() => dispatch(openDrawer(!draw))}>
+            <Nav name="nav-icon-a" size={25} color="#064635"></Nav>
+          </TouchableOpacity>
         {/* App-name */}
         <Text style={styles.name}>Medicare</Text>
       </View>

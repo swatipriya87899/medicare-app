@@ -16,7 +16,7 @@ const Card_Group = (props) => {
 
   useEffect(() => {
    
-    setTimeout(()=>{
+    // setTimeout(()=>{
       fetch(`${config.Base_API_URL}/hospital/getNearbyHospitals`, {
         method: 'POST',
         headers: {
@@ -32,7 +32,7 @@ const Card_Group = (props) => {
       }).then((response) => {
         return response.json()
       }).then((data) =>{ dispatch(getNearbyHospitals(data)); })
-    },10000)
+    // },10000)
 
   }, [props.location])
 

@@ -52,21 +52,23 @@ const Home = () => {
     setModalVisible(false);
   }
 
+
+
   //Carousel Image Of Home Page
-  const carouselImages = [
+  const [carouselImages,setCarouselImages] = useState([
     {
-      image: require('./../assests/images/Carousel1.png'),
+      image: require('./../assests/images/TB1.png'),
       desc: 'Silent Waters in the mountains in midst of Himilayas',
     },
     {
-      image: require('./../assests/images/Carousel2.png'),
+      image: require('./../assests/images/TB2.png'),
       desc: 'Silent Waters in the mountains in midst of Himilayas',
     },
     {
-      image: require('./../assests/images/Carousel3.png'),
+      image: require('./../assests/images/TB3.png'),
       desc: 'Silent Waters in the mountains in midst of Himilayas',
     },
-  ];
+  ]);
 
   return (
     <View style={styles.home}>
